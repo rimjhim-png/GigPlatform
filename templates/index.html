@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GigCooperative | Work Together. Earn Fairly.</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Gig<span>Cooperative</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">Home</a>
+
+        <a href="{{ url_for('gigs') }}">Find Gigs</a>
+
+        <a href="{{ url_for('cooperative') }}">
+            Cooperative
+        </a>
+
+        {% if session.get("user_id") %}
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('profile') }}">
+                Profile
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+            <a href="{{ url_for('register') }}"
+               class="nav-button">
+                Join Now
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            COMMUNITY-POWERED GIG PLATFORM
+        </div>
+
+        <h1>
+            Work Together.<br>
+            <span>Earn Fairly.</span>
+        </h1>
+
+        <p>
+            A cooperative marketplace connecting skilled workers
+            with people who need their services — with fair wages,
+            transparent opportunities and shared decision-making.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('gigs') }}"
+               class="btn primary-btn">
+                Find Gigs
+            </a>
+
+            <a href="{{ url_for('register') }}"
+               class="btn outline-btn">
+                Join Cooperative
+            </a>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <strong>Fair</strong>
+                <span>Wage Focus</span>
+            </div>
+
+            <div>
+                <strong>Smart</strong>
+                <span>Skill Matching</span>
+            </div>
+
+            <div>
+                <strong>Shared</strong>
+                <span>Ownership</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="floating-card card-one">
+
+            <div class="icon-circle">
+                💼
+            </div>
+
+            <div>
+                <strong>New Gig</strong>
+                <p>Website Development</p>
+            </div>
+
+        </div>
+
+
+        <div class="main-visual">
+
+            <div class="visual-top">
+
+                <span>
+                    Smart Match
+                </span>
+
+                <strong>
+                    96%
+                </strong>
+
+            </div>
+
+
+            <div class="match-circle">
+                96%
+            </div>
+
+
+            <h3>
+                Perfect Skill Match
+            </h3>
+
+            <p>
+                Your skills match this gig perfectly.
+            </p>
+
+        </div>
+
+
+        <div class="floating-card card-two">
+
+            <div class="icon-circle">
+                💰
+            </div>
+
+            <div>
+                <strong>Fair Wage</strong>
+                <p>₹12,000 estimated</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <span>
+            WHY GIGCOOPERATIVE?
+        </span>
+
+        <h2>
+            More than a gig platform.
+        </h2>
+
+        <p>
+            Built to make gig work more transparent, fair and
+            beneficial for everyone.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🤝
+            </div>
+
+            <h3>
+                Cooperative Ownership
+            </h3>
+
+            <p>
+                Workers can participate in decisions and help
+                shape how the platform operates.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Smart Skill Matching
+            </h3>
+
+            <p>
+                Match workers and gigs using skills, experience
+                and previous work.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>
+                Fair Wage Estimator
+            </h3>
+
+            <p>
+                Get an estimated fair payment based on gig type,
+                duration and worker experience.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⭐
+            </div>
+
+            <h3>
+                Reputation Score
+            </h3>
+
+            <p>
+                Build trust through completed jobs, ratings and
+                professional experience.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-section">
+
+    <div class="section-heading">
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            From skill to opportunity.
+        </h2>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Create Profile
+            </h3>
+
+            <p>
+                Add your skills, experience and interests.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Find a Gig
+            </h3>
+
+            <p>
+                Discover work that matches your skills.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Apply
+            </h3>
+
+            <p>
+                Submit your proposal and expected price.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>
+                Get Paid
+            </h3>
+
+            <p>
+                Complete the work and build your reputation.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LATEST GIGS ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <span>
+            OPPORTUNITIES
+        </span>
+
+        <h2>
+            Latest gigs
+        </h2>
+
+        <p>
+            Explore opportunities posted by clients.
+        </p>
+
+    </div>
+
+
+    <div class="gig-grid">
+
+        {% for gig in gigs %}
+
+        <div class="gig-card">
+
+            <div class="gig-card-top">
+
+                <span class="category">
+                    {{ gig["category"] }}
+                </span>
+
+                <span class="status">
+                    Open
+                </span>
+
+            </div>
+
+
+            <h3>
+                {{ gig["title"] }}
+            </h3>
+
+            <p>
+                {{ gig["description"][:130] }}
+
+                {% if gig["description"]|length > 130 %}
+                    ...
+                {% endif %}
+            </p>
+
+
+            <div class="gig-details">
+
+                <span>
+                    💰 ₹{{ gig["budget"] }}
+                </span>
+
+                <span>
+                    📍 {{ gig["location"] }}
+                </span>
+
+                <span>
+                    ⏱ {{ gig["duration"] }} days
+                </span>
+
+            </div>
+
+
+            <a
+                href="{{ url_for(
+                    'gig_details',
+                    gig_id=gig['id']
+                ) }}"
+                class="gig-link"
+            >
+                View Gig →
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <h3>
+                No gigs available yet.
+            </h3>
+
+            <p>
+                Be the first client to post a gig.
+            </p>
+
+            {% if session.get("role") == "client" %}
+
+            <a
+                href="{{ url_for('post_gig') }}"
+                class="btn primary-btn"
+            >
+                Post a Gig
+            </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% if gigs %}
+
+    <div class="center-button">
+
+        <a href="{{ url_for('gigs') }}"
+           class="btn outline-dark-btn">
+
+            View All Gigs →
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- ================= INNOVATION ================= -->
+
+<section class="innovation-section">
+
+    <div class="innovation-content">
+
+        <span>
+            OUR INNOVATION
+        </span>
+
+        <h2>
+            A smarter and fairer way to work.
+        </h2>
+
+        <p>
+            Instead of treating workers as just users, our platform
+            gives them a voice in the cooperative while using
+            technology to improve job matching, fair compensation
+            and trust.
+        </p>
+
+        <div class="innovation-list">
+
+            <div>
+                <strong>✓ Smart matching</strong>
+                <span>Skills + experience + gig requirements</span>
+            </div>
+
+            <div>
+                <strong>✓ Fair wage estimation</strong>
+                <span>Reduce unrealistic pricing</span>
+            </div>
+
+            <div>
+                <strong>✓ Cooperative voting</strong>
+                <span>Members participate in decisions</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <h3>
+                GigCooperative
+            </h3>
+
+            <p>
+                Work together. Earn fairly.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="{{ url_for('index') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('gigs') }}">
+                Find Gigs
+            </a>
+
+            <a href="{{ url_for('cooperative') }}">
+                Cooperative
+            </a>
+
+            <a href="{{ url_for('register') }}">
+                Join
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 GigCooperative. Built for a cooperative future.
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

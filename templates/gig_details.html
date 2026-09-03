@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ gig["title"] }}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        GigCooperative
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('gigs') }}">
+            Back to Gigs
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="section">
+
+    <div class="detail-card">
+
+        <span class="category">
+            {{ gig["category"] }}
+        </span>
+
+        <h1>
+            {{ gig["title"] }}
+        </h1>
+
+        <p class="description">
+            {{ gig["description"] }}
+        </p>
+
+
+        <div class="gig-info">
+
+            <span>
+                💰 Budget: ₹{{ gig["budget"] }}
+            </span>
+
+            <span>
+                📍 {{ gig["location"] }}
+            </span>
+
+            <span>
+                ⏱ {{ gig["duration"] }} days
+            </span>
+
+        </div>
+
+
+        <p>
+            Required Skills:
+            <strong>
+                {{ gig["skills"] }}
+            </strong>
+        </p>
+
+
+        <p>
+            Posted by:
+            <strong>
+                {{ gig["client_name"] }}
+            </strong>
+        </p>
+
+
+        <div class="innovation-box">
+
+            <h3>
+                💰 Fair Wage Estimate
+            </h3>
+
+            <p>
+                Estimated fair starting wage:
+                <strong>
+                    ₹{{ fair_wage }}
+                </strong>
+            </p>
+
+        </div>
+
+
+        {% if session.get("role") == "worker"
+              and gig["status"] == "Open" %}
+
+        <a
+            href="{{ url_for(
+                'apply_gig',
+                gig_id=gig['id']
+            ) }}"
+            class="btn"
+        >
+            Apply for Gig
+        </a>
+
+        {% endif %}
+
+    </div>
+
+
+    {% if session.get("user_id") == gig["client_id"] %}
+
+    <h2>
+        Applications
+    </h2>
+
+
+    <div class="application-grid">
+
+        {% for application in applications %}
+
+        <div class="application-card">
+
+            <h3>
+                {{ application["worker_name"] }}
+            </h3>
+
+            <p>
+                Skills:
+                {{ application["skills"] }}
+            </p>
+
+            <p>
+                Experience:
+                {{ application["experience"] }} years
+            </p>
+
+            <p>
+                Rating:
+                ⭐ {{ application["rating"] }}
+            </p>
+
+            <p>
+                Smart Match:
+                <strong>
+                    {{ application["match_score"] }}%
+                </strong>
+            </p>
+
+            <p>
+                Proposed:
+                ₹{{ application["proposed_price"] }}
+            </p>
+
+            <p>
+                {{ application["proposal"] }}
+            </p>
+
+
+            {% if application["status"] == "Pending"
+                  and gig["status"] == "Open" %}
+
+            <form
+                method="POST"
+                action="{{ url_for(
+                    'accept_application',
+                    application_id=application['id']
+                ) }}"
+            >
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Accept Worker
+                </button>
+
+            </form>
+
+            {% else %}
+
+            <strong>
+                {{ application["status"] }}
+            </strong>
+
+            {% endif %}
+
+        </div>
+
+        {% else %}
+
+        <p>
+            No applications yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+</body>
+
+</html>

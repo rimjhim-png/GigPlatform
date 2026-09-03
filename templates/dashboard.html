@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        GigCooperative
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('gigs') }}">
+            Gigs
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            Profile
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="section">
+
+    <h1>
+        Welcome, {{ user["name"] }}
+    </h1>
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h2>
+                {{ reputation }}
+            </h2>
+
+            <p>
+                Reputation Score
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ user["completed_jobs"] }}
+            </h2>
+
+            <p>
+                Completed Jobs
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ user["rating"] }}
+            </h2>
+
+            <p>
+                Rating
+            </p>
+
+        </div>
+
+    </div>
+
+
+    {% if user["role"] == "client" %}
+
+        <a
+            href="{{ url_for('post_gig') }}"
+            class="btn"
+        >
+            + Post New Gig
+        </a>
+
+        <h2 class="dashboard-heading">
+            My Gigs
+        </h2>
+
+        <div class="gig-grid">
+
+            {% for gig in gigs %}
+
+            <div class="gig-card">
+
+                <span class="category">
+                    {{ gig["category"] }}
+                </span>
+
+                <h3>
+                    {{ gig["title"] }}
+                </h3>
+
+                <p>
+                    ₹{{ gig["budget"] }}
+                </p>
+
+                <p>
+                    Status:
+                    <strong>
+                        {{ gig["status"] }}
+                    </strong>
+                </p>
+
+                <a href="{{ url_for(
+                    'gig_details',
+                    gig_id=gig['id']
+                ) }}">
+                    View Applications →
+                </a>
+
+                {% if gig["status"] == "In Progress" %}
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'complete_gig',
+                        gig_id=gig['id']
+                    ) }}"
+                    class="inline-form"
+                >
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Mark Completed
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+            </div>
+
+            {% else %}
+
+            <p>
+                You haven't posted any gigs yet.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <a
+            href="{{ url_for('gigs') }}"
+            class="btn"
+        >
+            Find Work
+        </a>
+
+
+        <h2 class="dashboard-heading">
+            My Applications
+        </h2>
+
+
+        <div class="gig-grid">
+
+            {% for application in applications %}
+
+            <div class="gig-card">
+
+                <h3>
+                    {{ application["gig_title"] }}
+                </h3>
+
+                <p>
+                    Proposed Price:
+                    ₹{{ application["proposed_price"] }}
+                </p>
+
+                <p>
+                    Smart Match:
+                    <strong>
+                        {{ application["match_score"] }}%
+                    </strong>
+                </p>
+
+                <p>
+                    Status:
+                    <strong>
+                        {{ application["status"] }}
+                    </strong>
+                </p>
+
+            </div>
+
+            {% else %}
+
+            <p>
+                You haven't applied to any gigs yet.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+</body>
+
+</html>

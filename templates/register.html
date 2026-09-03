@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <h1>
+            Create Account
+        </h1>
+
+        <p>
+            Join the Gig Cooperative
+        </p>
+
+
+        {% with messages = get_flashed_messages() %}
+
+            {% for message in messages %}
+
+                <div class="flash">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+
+        <form method="POST">
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                required
+            >
+
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                required
+            >
+
+
+            <label>
+                Account Type
+            </label>
+
+            <select name="role">
+
+                <option value="worker">
+                    Worker
+                </option>
+
+                <option value="client">
+                    Client
+                </option>
+
+            </select>
+
+
+            <label>
+                Skills
+            </label>
+
+            <input
+                type="text"
+                name="skills"
+                placeholder="e.g. Python, Design, Plumbing"
+            >
+
+
+            <label>
+                Years of Experience
+            </label>
+
+            <input
+                type="number"
+                name="experience"
+                min="0"
+                value="0"
+            >
+
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Register
+            </button>
+
+        </form>
+
+
+        <p>
+
+            Already registered?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

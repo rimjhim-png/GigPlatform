@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        GigCooperative Admin
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="section">
+
+    <h1>
+        Admin Analytics
+    </h1>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h2>
+                {{ total_users }}
+            </h2>
+
+            <p>
+                Total Users
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ total_workers }}
+            </h2>
+
+            <p>
+                Workers
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ total_clients }}
+            </h2>
+
+            <p>
+                Clients
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ total_gigs }}
+            </h2>
+
+            <p>
+                Total Gigs
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ open_gigs }}
+            </h2>
+
+            <p>
+                Open Gigs
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ completed_gigs }}
+            </h2>
+
+            <p>
+                Completed Gigs
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

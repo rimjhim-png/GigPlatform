@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <div class="form-box">
+
+        <h1>
+            My Profile
+        </h1>
+
+
+        {% with messages = get_flashed_messages() %}
+
+            {% for message in messages %}
+
+                <div class="flash">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endwith %}
+
+
+        <div class="innovation-box">
+
+            <h3>
+                ⭐ Reputation Score
+            </h3>
+
+            <p>
+                {{ reputation }}/100
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            <label>
+                Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                value="{{ user['name'] }}"
+                required
+            >
+
+
+            <label>
+                Skills
+            </label>
+
+            <input
+                type="text"
+                name="skills"
+                value="{{ user['skills'] }}"
+                placeholder="Python, Design, Marketing"
+            >
+
+
+            <label>
+                Years of Experience
+            </label>
+
+            <input
+                type="number"
+                name="experience"
+                min="0"
+                value="{{ user['experience'] }}"
+            >
+
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Update Profile
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

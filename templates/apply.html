@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Apply</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <div class="form-box">
+
+        <h1>
+            Apply for {{ gig["title"] }}
+        </h1>
+
+
+        <div class="innovation-box">
+
+            <h3>
+                ⚡ Smart Skill Match
+            </h3>
+
+            <p>
+
+                Your skill match:
+
+                <strong>
+                    {{ match_score }}%
+                </strong>
+
+            </p>
+
+        </div>
+
+
+        <div class="innovation-box">
+
+            <h3>
+                💰 Fair Wage Estimator
+            </h3>
+
+            <p>
+
+                Suggested fair wage:
+
+                <strong>
+                    ₹{{ fair_wage }}
+                </strong>
+
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            <label>
+                Your Proposal
+            </label>
+
+            <textarea
+                name="proposal"
+                rows="6"
+                placeholder="Explain why you are suitable..."
+                required
+            ></textarea>
+
+
+            <label>
+                Your Proposed Price (₹)
+            </label>
+
+            <input
+                type="number"
+                name="proposed_price"
+                min="1"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Submit Application
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

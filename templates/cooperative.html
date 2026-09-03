@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Cooperative</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        GigCooperative
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('dashboard') }}">
+            Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<section class="section">
+
+    <h1>
+        Cooperative Governance
+    </h1>
+
+    <p>
+        Members can propose and vote on platform decisions.
+    </p>
+
+
+    {% if session.get("user_id") %}
+
+    <div class="form-box">
+
+        <h2>
+            Create Proposal
+        </h2>
+
+        <form
+            method="POST"
+            action="{{ url_for(
+                'create_proposal'
+            ) }}"
+        >
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Proposal title"
+                required
+            >
+
+            <textarea
+                name="description"
+                rows="4"
+                placeholder="Describe your proposal..."
+                required
+            ></textarea>
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Create Proposal
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+
+    <h2>
+        Active Proposals
+    </h2>
+
+
+    <div class="proposal-grid">
+
+        {% for proposal in proposals %}
+
+        <div class="proposal-card">
+
+            <h3>
+                {{ proposal["title"] }}
+            </h3>
+
+            <p>
+                {{ proposal["description"] }}
+            </p>
+
+            <p>
+                Proposed by:
+                {{ proposal["creator_name"] }}
+            </p>
+
+
+            <div class="votes">
+
+                <span>
+                    👍 {{ proposal["yes_votes"] }}
+                </span>
+
+                <span>
+                    👎 {{ proposal["no_votes"] }}
+                </span>
+
+            </div>
+
+
+            {% if session.get("user_id") %}
+
+            <div class="vote-buttons">
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'vote_proposal',
+                        proposal_id=proposal['id'],
+                        vote='yes'
+                    ) }}"
+                >
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Vote Yes
+                    </button>
+
+                </form>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'vote_proposal',
+                        proposal_id=proposal['id'],
+                        vote='no'
+                    ) }}"
+                >
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Vote No
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+        {% else %}
+
+        <p>
+            No proposals yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+</body>
+
+</html>
